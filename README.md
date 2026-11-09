@@ -40,7 +40,7 @@ The only extra package from this repo is `psd-tools` (>= 1.9.0).
 
 5. Load the graph. In ComfyUI, drag this file onto the canvas, or use **Workflow → Open**:
 
-[workflows/Sharp_Subject_Cutout_PSD.json](workflows/Sharp_Subject_Cutout_PSD.json)
+[Sharp_Subject_Cutout_PSD.json](Sharp_Subject_Cutout_PSD.json)
 
 On GitHub, open that file and use **Download raw file**. Then select an image on **Load Image (Source Path)** and queue the prompt. The PSD is written next to that file.
 
@@ -155,7 +155,7 @@ Ebből a repóból az egyetlen külön csomag a `psd-tools` (>= 1.9.0).
 
 5. Töltsd be a gráfot. A ComfyUI vásznára húzd rá ezt a fájlt, vagy a **Workflow → Open** menüvel nyisd meg:
 
-[workflows/Sharp_Subject_Cutout_PSD.json](workflows/Sharp_Subject_Cutout_PSD.json)
+[Sharp_Subject_Cutout_PSD.json](Sharp_Subject_Cutout_PSD.json)
 
 GitHubon a fájlt megnyitva a **Download raw file** tölti le. Utána a **Load Image (Source Path)** node-on válaszd ki a képet, és indítsd a futtatást. A PSD a kép mellé kerül.
 
