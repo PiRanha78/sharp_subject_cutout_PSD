@@ -20,29 +20,53 @@ ComfyUI only knows the file it loaded. An image uploaded in the UI is stored in 
 
 ## Install
 
-1. Clone this repository into ComfyUI `custom_nodes`:
+These steps are for the Windows portable build. Close ComfyUI first. Run the commands from the portable folder, the one that contains `python_embeded` and `ComfyUI`.
 
-```text
-ComfyUI\custom_nodes\comfyui_precise_circle_crop
+Example root: `C:\ComfyUI_windows_portable`
+
+### 1. Install this node
+
+```bat
+git clone https://github.com/PiRanha78/sharp_subject_cutout_PSD.git ComfyUI\custom_nodes\sharp_subject_cutout_PSD
+python_embeded\python.exe -m pip install -r ComfyUI\custom_nodes\sharp_subject_cutout_PSD\requirements.txt
 ```
 
-2. Install the dependency with the same Python that runs ComfyUI:
+That installs `psd-tools` (>= 1.9.0) into the Python that actually starts ComfyUI. A system `pip install` does not reach the portable runtime.
 
-```text
-python_embeded\python.exe -m pip install -r requirements.txt
+On a non-portable install, use that environment’s Python instead, for example `ComfyUI\venv\Scripts\python.exe -m pip install -r requirements.txt`, after cloning into `ComfyUI\custom_nodes`.
+
+### 2. Install RMBG
+
+The example workflow needs the separate [ComfyUI-RMBG](https://github.com/1038lab/ComfyUI-RMBG) node. This repository does not contain the segmentation model. Skip this step only if that node is already installed and the **RMBG** node appears in the menu.
+
+```bat
+git clone https://github.com/1038lab/ComfyUI-RMBG.git ComfyUI\custom_nodes\ComfyUI-RMBG
+python_embeded\python.exe -m pip install -r ComfyUI\custom_nodes\ComfyUI-RMBG\requirements.txt
 ```
 
-The only extra package from this repo is `psd-tools` (>= 1.9.0).
+The first run of RMBG-2.0 downloads its weights. That needs a network connection and several GB of free disk space.
 
-3. The example workflow also uses the separate **RMBG** node (`comfyui-rmbg`). Install that custom node too if it is not already there. This pack does not include the segmentation model.
+### 3. Restart ComfyUI
 
-4. Restart ComfyUI.
+Start it only after both installs finish. A running session does not pick up a new custom node.
 
-5. Load the graph. In ComfyUI, drag this file onto the canvas, or use **Workflow → Open**:
+In the node search box, confirm that these three names exist:
 
-[Sharp_Subject_Cutout_PSD.json](Sharp_Subject_Cutout_PSD.json)
+- **Load Image (Source Path)**
+- **Sharp Subject Cutout**
+- **Save Cutout as PSD**
 
-On GitHub, open that file and use **Download raw file**. Then select an image on **Load Image (Source Path)** and queue the prompt. The PSD is written next to that file.
+If they are missing, the clone is not inside `ComfyUI\custom_nodes`, or ComfyUI was not restarted.
+
+### 4. Load the workflow
+
+Download [Sharp_Subject_Cutout_PSD.json](Sharp_Subject_Cutout_PSD.json) (**Download raw file** on GitHub). Drag that file onto the ComfyUI canvas, or use **Workflow → Open**.
+
+On **Load Image (Source Path)**, choose the photograph, then queue the prompt. The PSD is written next to that file:
+
+`photo.jpg` → `photo_(ComfyUI).psd`
+
+An image uploaded in the UI is stored in `ComfyUI\input`, so the PSD appears beside that copy, not beside a file that lives somewhere else on the disk.
 
 ## Workflow
 
@@ -135,29 +159,53 @@ A ComfyUI csak azt a fájlt ismeri, amit betöltött. A felületen feltöltött 
 
 ## Telepítés
 
-1. Klónozd a tárolót a ComfyUI `custom_nodes` mappájába:
+A lépések a Windows portable változatra vannak írva. Először zárd be a ComfyUI-t. A parancsokat a portable mappából futtasd, abból, amelyben a `python_embeded` és a `ComfyUI` van.
 
-```text
-ComfyUI\custom_nodes\comfyui_precise_circle_crop
+Példa gyökér: `C:\ComfyUI_windows_portable`
+
+### 1. Ennek a node-nak a telepítése
+
+```bat
+git clone https://github.com/PiRanha78/sharp_subject_cutout_PSD.git ComfyUI\custom_nodes\sharp_subject_cutout_PSD
+python_embeded\python.exe -m pip install -r ComfyUI\custom_nodes\sharp_subject_cutout_PSD\requirements.txt
 ```
 
-2. A ComfyUI saját Pythonjával telepítsd a függőséget:
+Ez a `psd-tools` csomagot (>= 1.9.0) abba a Pythonba teszi, amelyik a ComfyUI-t indítja. A rendszer `pip install` parancsa a portable környezetet nem éri el.
 
-```text
-python_embeded\python.exe -m pip install -r requirements.txt
+Ha a ComfyUI nem portable, a saját környezet Pythonját használd, például `ComfyUI\venv\Scripts\python.exe -m pip install -r requirements.txt`, miután a repót a `ComfyUI\custom_nodes` mappába klónoztad.
+
+### 2. Az RMBG telepítése
+
+A mintaworkflow a külön [ComfyUI-RMBG](https://github.com/1038lab/ComfyUI-RMBG) node-ot használja. Ebben a repóban nincs szegmentáló modell. Ezt a lépést csak akkor hagyd ki, ha az a node már telepítve van, és az **RMBG** megjelenik a menüben.
+
+```bat
+git clone https://github.com/1038lab/ComfyUI-RMBG.git ComfyUI\custom_nodes\ComfyUI-RMBG
+python_embeded\python.exe -m pip install -r ComfyUI\custom_nodes\ComfyUI-RMBG\requirements.txt
 ```
 
-Ebből a repóból az egyetlen külön csomag a `psd-tools` (>= 1.9.0).
+Az RMBG-2.0 első futtatása letölti a súlyokat. Ehhez hálózat kell, és több GB szabad lemez.
 
-3. A mintaworkflow az **RMBG** node-ot is használja (`comfyui-rmbg`). Ha az még nincs telepítve, azt külön kell feltenni. A szegmentáló modell nem része ennek a csomagnak.
+### 3. A ComfyUI újraindítása
 
-4. Indítsd újra a ComfyUI-t.
+Csak akkor indítsd el, ha mindkét telepítés lefutott. A már futó program az új custom node-ot nem veszi észre.
 
-5. Töltsd be a gráfot. A ComfyUI vásznára húzd rá ezt a fájlt, vagy a **Workflow → Open** menüvel nyisd meg:
+A node-keresőben ennek a három névnek kell megjelennie:
 
-[Sharp_Subject_Cutout_PSD.json](Sharp_Subject_Cutout_PSD.json)
+- **Load Image (Source Path)**
+- **Sharp Subject Cutout**
+- **Save Cutout as PSD**
 
-GitHubon a fájlt megnyitva a **Download raw file** tölti le. Utána a **Load Image (Source Path)** node-on válaszd ki a képet, és indítsd a futtatást. A PSD a kép mellé kerül.
+Ha hiányoznak, a klón nem a `ComfyUI\custom_nodes` mappában van, vagy a ComfyUI nem indult újra.
+
+### 4. A workflow betöltése
+
+Töltsd le a [Sharp_Subject_Cutout_PSD.json](Sharp_Subject_Cutout_PSD.json) fájlt (GitHubon: **Download raw file**). Húzd a ComfyUI vásznára, vagy nyisd meg a **Workflow → Open** menüvel.
+
+A **Load Image (Source Path)** node-on válaszd ki a fotót, majd indítsd a futtatást. A PSD a kép mellé kerül:
+
+`foto.jpg` → `foto_(ComfyUI).psd`
+
+A felületen feltöltött kép a `ComfyUI\input` mappába kerül, ezért a PSD ennek a másolatnak a mellé íródik, nem egy máshol lévő eredeti fájl mellé.
 
 ## Workflow
 
