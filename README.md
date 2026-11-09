@@ -20,13 +20,29 @@ ComfyUI only knows the file it loaded. An image uploaded in the UI is stored in 
 
 ## Install
 
-Clone this repository into ComfyUI `custom_nodes`, then install the dependency with the same Python that runs ComfyUI:
+1. Clone this repository into ComfyUI `custom_nodes`:
+
+```text
+ComfyUI\custom_nodes\comfyui_precise_circle_crop
+```
+
+2. Install the dependency with the same Python that runs ComfyUI:
 
 ```text
 python_embeded\python.exe -m pip install -r requirements.txt
 ```
 
-The only extra package is `psd-tools` (>= 1.9.0). Restart ComfyUI after installing.
+The only extra package from this repo is `psd-tools` (>= 1.9.0).
+
+3. The example workflow also uses the separate **RMBG** node (`comfyui-rmbg`). Install that custom node too if it is not already there. This pack does not include the segmentation model.
+
+4. Restart ComfyUI.
+
+5. Load the graph. In ComfyUI, drag this file onto the canvas, or use **Workflow → Open**:
+
+[workflows/Sharp_Subject_Cutout_PSD.json](workflows/Sharp_Subject_Cutout_PSD.json)
+
+On GitHub, open that file and use **Download raw file**. Then select an image on **Load Image (Source Path)** and queue the prompt. The PSD is written next to that file.
 
 ## Workflow
 
@@ -119,13 +135,29 @@ A ComfyUI csak azt a fájlt ismeri, amit betöltött. A felületen feltöltött 
 
 ## Telepítés
 
-Klónozd a tárolót a ComfyUI `custom_nodes` mappájába, majd a ComfyUI saját Pythonjával telepítsd a függőséget:
+1. Klónozd a tárolót a ComfyUI `custom_nodes` mappájába:
+
+```text
+ComfyUI\custom_nodes\comfyui_precise_circle_crop
+```
+
+2. A ComfyUI saját Pythonjával telepítsd a függőséget:
 
 ```text
 python_embeded\python.exe -m pip install -r requirements.txt
 ```
 
-Az egyetlen külön csomag a `psd-tools` (>= 1.9.0). Telepítés után indítsd újra a ComfyUI-t.
+Ebből a repóból az egyetlen külön csomag a `psd-tools` (>= 1.9.0).
+
+3. A mintaworkflow az **RMBG** node-ot is használja (`comfyui-rmbg`). Ha az még nincs telepítve, azt külön kell feltenni. A szegmentáló modell nem része ennek a csomagnak.
+
+4. Indítsd újra a ComfyUI-t.
+
+5. Töltsd be a gráfot. A ComfyUI vásznára húzd rá ezt a fájlt, vagy a **Workflow → Open** menüvel nyisd meg:
+
+[workflows/Sharp_Subject_Cutout_PSD.json](workflows/Sharp_Subject_Cutout_PSD.json)
+
+GitHubon a fájlt megnyitva a **Download raw file** tölti le. Utána a **Load Image (Source Path)** node-on válaszd ki a képet, és indítsd a futtatást. A PSD a kép mellé kerül.
 
 ## Workflow
 
